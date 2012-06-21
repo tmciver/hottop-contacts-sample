@@ -5,11 +5,13 @@
             [ring.middleware.reload :as ring-reload]
             [clojure.pprint :as pp]))
 
-(def hello-resource (resource/create-readonly-html-resource "/hello" (constantly "<a href=\"goodbye\">Hello!</a>")))
-(def goodbye-resource (resource/create-readonly-html-resource "/goodbye" (constantly "<a href=\"hello\">Good Bye!</a>")))
-(def my-app (core/app ["hello"] hello-resource))
+(def page1 (resource/create-readonly-html-resource "/page1" (constantly "<a href=\"page2\">Page 2</a>")))
+(def page2 (resource/create-readonly-html-resource "/page2" (constantly "<a href=\"page3\">Page 3</a>")))
+(def page3 (resource/create-readonly-html-resource "/page3" (constantly "<a href=\"page1\">Page 1</a>")))
+(def my-app (core/app ["page1"] page1
+                      ["page2"] page2
+                      ["page3"] page3))
 
 (defn -main
   [port]
-;  (pp/pprint hello-resource)
   (ring-jetty/run-jetty my-app {:port (Integer/parseInt port)}))
