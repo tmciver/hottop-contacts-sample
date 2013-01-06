@@ -2,4 +2,4 @@
   (:require [hottop.resource :as res]
             [hottop-sample.view.html :as html]))
 
-(def resource (res/create-readonly-html-resource (constantly nil) html/create-contact))
+(def resource (res/create-readonly-html-resource html/create-contact))
