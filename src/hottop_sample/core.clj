@@ -7,10 +7,10 @@
             [hottop.resource :as resource]
             [ring.adapter.jetty :as ring-jetty]))
 
-(def my-app (core/app ["/"] start/resource
-                      ["/contacts"] contacts/resource
-                      ["/contact"] contact/resource
-                      ["/create-contact"] create/resource))
+(def my-app (core/routes ["/"] start/resource
+                         ["/contacts"] contacts/resource
+                         ["/contact"] contact/resource
+                         ["/create-contact"] create/resource))
 
 (defn -main
   [port]
