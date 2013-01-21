@@ -7,10 +7,11 @@
   "HTML template to be used for all HTML pages."
   [subtitle body]
   (hiccup/html
-   [:head
-    [:title (str "Hottop Sample App - " subtitle)]]
-   [:body
-    body]))
+   [:html
+    [:head
+     [:title (str "Hottop Sample App - " subtitle)]]
+    [:body
+     body]]))
 
 (defn start
   [_]
@@ -20,15 +21,17 @@
   [_]
   (html-template "Create Contact"
                  (hiccup/html [:h2 "Create a new contact"]
-                              (form/form-to [:post "/contacts"]
-                                            [:lable "First name: "]
+                              (form/form-to [:post "/contact"]
+                                            [:label "First name: "]
                                             (form/text-field "fname")
                                             [:br]
-                                            [:lable "Last name: "]
+                                            [:label "Last name: "]
                                             (form/text-field "lname")
                                             [:br]
-                                            [:lable "Phone number: "]
-                                            (form/text-field "number")))))
+                                            [:label "Phone number: "]
+                                            (form/text-field "number")
+                                            [:br]
+                                            (form/submit-button "Create")))))
 
 (defn- contact-to-table-row
   "Formats the given contact as an HTML table row."

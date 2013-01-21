@@ -38,5 +38,5 @@ into the map."
 returned."
   [contact]
   (let [id (inc (apply max (keys @contacts)))]
-    (alter contacts conj [id contact])
+    (dosync (alter contacts conj [id contact]))
     id))
