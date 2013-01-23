@@ -21,7 +21,7 @@
   [_]
   (html-template "Create Contact"
                  (hiccup/html [:h2 "Create a new contact"]
-                              (form/form-to [:post "/contact"]
+                              (form/form-to [:post "/contacts"]
                                             [:label "First name: "]
                                             (form/text-field "fname")
                                             [:br]
@@ -29,7 +29,7 @@
                                             (form/text-field "lname")
                                             [:br]
                                             [:label "Phone number: "]
-                                            (form/text-field "number")
+                                            (form/text-field "phone")
                                             [:br]
                                             (form/submit-button "Create")))))
 
@@ -56,3 +56,8 @@
   "Formats the given seq of contacts as a page of HTML."
   [contacts]
   (html-template "Contacts" (contacts-to-table contacts)))
+
+(defn contact
+  "Formats the given contact as a page of HTML."
+  [contact]
+  (html-template "Contact" (contacts-to-table [contact])))

@@ -5,12 +5,14 @@
             [hottop-sample.resource.create-contact :as create]
             [hottop.core :as core]
             [hottop.resource :as resource]
-            [ring.adapter.jetty :as ring-jetty]))
+            [ring.adapter.jetty :as ring-jetty]
+            [ring.middleware.params :as rmp]))
 
-(def my-app (core/routes ["/"] start/resource
-                         ["/contacts"] contacts/resource
-                         ["/contact"] contact/resource
-                         ["/create-contact"] create/resource))
+(def my-app (-> (core/routes ["/"] start/resource
+                             ["/contacts"] contacts/resource
+                             ["/contact/:id"] contact/resource
+                             ["/create-contact"] create/resource)
+                rmp/wrap-params))
 
 (defn -main
   [port]
