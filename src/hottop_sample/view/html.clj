@@ -31,6 +31,9 @@
                                             [:label "Phone number: "]
                                             (form/text-field "phone")
                                             [:br]
+                                            [:label "Description: "]
+                                            (form/text-field "desc")
+                                            [:br]
                                             (form/submit-button "Create")))))
 
 (defn- contact-to-table-row
@@ -55,7 +58,9 @@
 (defn contacts
   "Formats the given seq of contacts as a page of HTML."
   [contacts]
-  (html-template "Contacts" (contacts-to-table contacts)))
+  (html-template "Contacts" [:div
+                             (elem/link-to "/create-contact" "Add a contact")
+                             (contacts-to-table contacts)]))
 
 (defn contact
   "Formats the given contact as a page of HTML."

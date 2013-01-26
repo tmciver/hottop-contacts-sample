@@ -10,10 +10,10 @@
   (db/get-contacts))
 
 (defn- post
-  "POSTs a contact into the data store."
+  "POSTs a contact into the database."
   [request]
-  (let [{:strs [fname lname phone]} (:form-params request)
-        contact (hash-map :fname fname :lname lname :phone phone)
+  (let [{:strs [fname lname phone desc]} (:form-params request)
+        contact (hash-map :fname fname :lname lname :phone phone :desc desc)
         id (db/add-contact contact)]
     id))
 
