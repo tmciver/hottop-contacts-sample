@@ -1,8 +1,7 @@
 (ns hottop-sample.resource.contacts
   (:require [hottop.resource :as res]
             [hottop-sample.view.html :as html]
-            [hottop-sample.db :as db]
-            [ring.util.response :as ring])
+            [hottop-sample.db :as db])
   (:refer-clojure :exclude [get]))
 
 (defn- get
@@ -16,7 +15,8 @@
   (let [{:strs [fname lname phone]} (:form-params request)
         contact (hash-map :fname fname :lname lname :phone phone)
         id (db/add-contact contact)]
-    (ring/redirect-after-post "/contacts")))
+    id))
 
 (def resource (-> (res/create-readonly-html-resource get html/contacts)
-                  (assoc-in [:methods :post] post)))
+                  (assoc-in [:methods :post] post)
+                  (assoc :redirect-after-html-post "/contacts")))
